@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">Adi</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
     <h1>Shopping List Page</h1>
 
     <h5>Name:</h5>
@@ -11,23 +27,37 @@
 
     <table>
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Date Added</th>
+            <th style="text-align: center;" class="px-4">Name</th>
+            <th style="text-align: center;" class="px-4">Price</th>
+            <th style="text-align: center;" class="px-4">Description</th>
+            <th style="text-align: center;" class="px-4">Date Added</th>
         </tr>
     
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
     
         {% for product in products %}
             <tr>
-                <td>{{product.name}}</td>
-                <td>{{product.price}}</td>
-                <td>{{product.description}}</td>
-                <td>{{product.date_added}}</td>
+                <td style="text-align: center;" class="px-4">{{product.name}}</td>
+                <td style="text-align: center;" class="px-4">{{product.price}}</td>
+                <td style="text-align: center;" class="px-4">{{product.description}}</td>
+                <td style="text-align: center;" class="px-4">{{product.date_added}}</td>
+                <td class="px-4">
+                    <a href="{% url 'main:edit_product' product.pk %}">
+                        <button>
+                            Edit
+                        </button>
+                    </a>
+                    <a href="{% url 'main:delete_product' product.pk %}">
+                        <button>
+                            Delete
+                        </button>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
+
+    <br />
 
     <h5>Sesi terakhir login: {{last_login}}</h5>
     
